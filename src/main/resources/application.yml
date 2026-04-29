@@ -1,0 +1,25 @@
+server:
+  port: ${PORT:8085}
+
+spring:
+  application:
+    name: ms-notificaciones
+  
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH0_ISSUER_URI}
+          audiences: ${AUTH0_AUDIENCE}
+
+# Variables específicas para EmailJS
+emailjs:
+  service-id: ${EMAILJS_SERVICE_ID}
+  public-key: ${EMAILJS_PUBLIC_KEY}
+  private-key: ${EMAILJS_PRIVATE_KEY}
+  api-url: "${EMAILJS_API_URL}"
