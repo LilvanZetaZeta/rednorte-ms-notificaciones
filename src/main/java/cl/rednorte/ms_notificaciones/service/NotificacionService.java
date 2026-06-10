@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestOperations;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -18,6 +18,9 @@ public class NotificacionService {
 
     @Autowired
     private LogComunicacionRepository logRepository;
+
+    @Autowired
+    private RestOperations restTemplate;
 
     @Value("${emailjs.api-url}") private String apiUrl;
     @Value("${emailjs.service-id}") private String serviceId;
@@ -50,7 +53,6 @@ public class NotificacionService {
             emailJsBody.put("template_params", templateParams);
 
            
-            RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, emailJsBody, String.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
